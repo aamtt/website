@@ -6,6 +6,10 @@
   --label: #6b6459;
   --link: #ed3f3f;
   --curve: #e6cece;
+  --panel: #f6f3ed;
+  --tab: #f0ede6;
+  --edge: rgba(0, 0, 0, 0.08);
+  --slide: 0.32s cubic-bezier(0.4, 0, 0.2, 1);
   --column: 720px;
   --title-lead: 20px;
   --gutter: 36px;
@@ -654,26 +658,10 @@ footer a:hover {
 
   .recipe {
     overflow-x: auto;
-    padding-right: 36px;
     font-size: 11.5px;
     overscroll-behavior-x: contain;
   }
 
-  .copy {
-    top: -3px;
-    right: 0;
-    width: 32px;
-    height: 32px;
-  }
-
-  .shells {
-    gap: 18px;
-    margin-top: 14px;
-  }
-
-  .shell {
-    padding: 6px 0;
-  }
 
   .faces {
     margin-top: 16px;
@@ -767,25 +755,33 @@ footer a:hover {
 
 .snippet {
   position: relative;
-  margin-bottom: 8px;
+  margin: 0;
+  padding: 15px 16px 13px;
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  background: var(--panel);
+  transition: border-radius var(--slide);
 }
 
 .copy {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 7px;
+  right: 7px;
   z-index: 2;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   padding: 0;
   border: 0;
-  background: var(--bg);
+  border-radius: 6px;
+  background: var(--panel);
   color: var(--dim);
   cursor: pointer;
-  transition: color 140ms ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .copy[hidden] {
@@ -817,6 +813,7 @@ footer a:hover {
 
 .copy:hover,
 .copy:focus-visible {
+  background: var(--tab);
   color: var(--strong);
 }
 
@@ -826,7 +823,8 @@ footer a:hover {
 
 .recipe {
   margin: 0;
-  padding: 16px 0 14px;
+  padding: 0;
+  padding-right: 22px;
   color: var(--dim);
   font: 12px/1.8 var(--mono);
   letter-spacing: 0;
@@ -843,34 +841,128 @@ footer a:hover {
 }
 
 .shells {
+  position: relative;
+  z-index: 1;
   display: flex;
-  gap: 14px;
-  margin-top: 12px;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
+  align-items: center;
+  margin: -1px 0 8px;
 }
 
 .shells[hidden] {
   display: none;
 }
 
+.tabs {
+  position: relative;
+  display: flex;
+  min-width: 0;
+}
+
 .shell {
-  padding: 0;
+  position: relative;
+  z-index: 1;
+  padding: 8px 14px 9px;
   border: 0;
   background: none;
   color: var(--dim);
-  font: inherit;
-  letter-spacing: inherit;
+  font: 500 13px/1 var(--sans);
+  letter-spacing: -0.01em;
   cursor: pointer;
+  transition: color 0.18s ease;
 }
 
-.shell:hover {
-  color: var(--fg);
+.ghost,
+.glide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--w, 0);
+  translate: var(--x, 0) 0;
+  pointer-events: none;
+  transition:
+    translate var(--slide),
+    width var(--slide),
+    opacity 0.16s ease;
 }
 
-.shell[aria-pressed="true"] {
+.ghost {
+  z-index: 0;
+  top: 3px;
+  height: calc(100% - 6px);
+  width: calc(var(--w, 0) - 8px);
+  translate: calc(var(--x, 0) + 4px) 0;
+  border-radius: 8px;
+  background: var(--tab);
+  opacity: 0;
+}
+
+.tabs.is-hovering .ghost {
+  opacity: 1;
+}
+
+.tabs.is-settling .ghost,
+.tabs.is-settling .glide {
+  transition: none;
+}
+
+.glide {
+  z-index: 0;
+  border: 1px solid var(--edge);
+  border-top-color: var(--panel);
+  border-radius: 0 0 12px 12px;
+  background: var(--panel);
+}
+
+.glide::before,
+.glide::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  width: 11px;
+  height: 10px;
+  pointer-events: none;
+}
+
+.glide::before {
+  left: -11px;
+  visibility: visible;
+  transition: visibility 0s linear 0.24s;
+  background:
+    linear-gradient(var(--panel), var(--panel)) 100% 0 / 1px 100% no-repeat,
+    radial-gradient(
+        circle at 0 100%,
+        transparent 9px,
+        var(--edge) 9px 10px,
+        var(--panel) 10px
+      )
+      0 0 / 10px 100% no-repeat;
+}
+
+.glide::after {
+  right: -11px;
+  background:
+    linear-gradient(var(--panel), var(--panel)) 0 0 / 1px 100% no-repeat,
+    radial-gradient(
+        circle at 100% 100%,
+        transparent 9px,
+        var(--edge) 9px 10px,
+        var(--panel) 10px
+      )
+      100% 0 / 10px 100% no-repeat;
+}
+
+.tabs.at-start .glide::before {
+  visibility: hidden;
+  transition: visibility 0s linear 0s;
+}
+
+.shell[aria-selected="true"] {
   color: var(--strong);
+}
+
+.snippet.is-joined {
+  border-bottom-left-radius: 0;
 }
 
 .faces {
@@ -1108,6 +1200,15 @@ footer a:hover {
   .polaroid,
   .polaroid-link.is-previewing .polaroid,
   .polaroid:hover {
+    transition: none;
+  }
+
+  .shell,
+  .ghost,
+  .glide,
+  .glide::before,
+  .glide::after,
+  .snippet {
     transition: none;
   }
 }
