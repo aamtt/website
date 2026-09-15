@@ -12,7 +12,7 @@
         <span class="contribution-grid"></span>
       </span>
       <span class="polaroid-profile">
-        <img alt=""{{with .Github.AvatarURL}} src="{{.}}"{{end}} />
+        <img alt="" {{with .Github.AvatarURL}} src="{{.}}" {{end}} />
         <span>
           <strong>{{.Github.DisplayName}}</strong>
           <small>{{.Github.Username}}</small>
@@ -33,7 +33,7 @@
       ></span>
       <span class="polaroid-profile">
         <img
-          src="https://pbs.twimg.com/profile_images/2029463293635772421/3fZPkyDK_x96.jpg"
+          src="https://pbs.twimg.com/profile_images/2097903684546080768/OsIlMRky_x96.jpg"
           alt=""
         />
         <span>
@@ -45,7 +45,11 @@
   </span>
   <span class="polaroid-link">
     <a href="/discord">discord</a>
-    <span class="polaroid polaroid-discord" aria-hidden="true" data-user="{{.DiscordID}}">
+    <span
+      class="polaroid polaroid-discord"
+      aria-hidden="true"
+      data-user="{{.DiscordID}}"
+    >
       {{if .Presence.BannerURL}}
       <span
         class="polaroid-banner"
@@ -56,15 +60,29 @@
       {{end}}
       <span class="polaroid-profile">
         <span class="discord-avatar-wrap">
-          <img class="discord-avatar" alt="" crossorigin="anonymous"{{with .Presence.AvatarURL}} src="{{.}}"{{end}} />
-          <i class="discord-status-dot discord-status-{{with .Presence.Status}}{{.}}{{else}}offline{{end}}"></i>
+          <img
+            class="discord-avatar"
+            alt=""
+            crossorigin="anonymous"
+            {{with
+            .Presence.AvatarURL}}
+            src="{{.}}"
+            {{end}}
+          />
+          <i
+            class="discord-status-dot discord-status-{{with .Presence.Status}}{{.}}{{else}}offline{{end}}"
+          ></i>
         </span>
         <span>
           <strong class="discord-name">{{.Presence.DisplayName}}</strong>
-          <small class="discord-handle">{{with .Presence.Username}}@{{.}}{{end}}</small>
+          <small class="discord-handle"
+            >{{with .Presence.Username}}@{{.}}{{end}}</small
+          >
           <em
             class="discord-listening"
-            {{if not .Presence.Listening}}hidden{{end}}
+            {{if
+            not
+            .Presence.Listening}}hidden{{end}}
             >{{with .Presence.Listening}}listening to {{.}}{{end}}</em
           >
         </span>
