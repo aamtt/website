@@ -14,6 +14,17 @@ type Project struct {
 
 var projects = []Project{
 	{
+		Title:       "pk",
+		Description: "take a p(ee)k inside a live output",
+		Year:        2026,
+		URL:         "https://github.com/aamtt/pk",
+		Color:       "#3F6B6B",
+		A:           5,
+		B:           5,
+		C:           2,
+		Phase:       0.785,
+	},
+	{
 		Title:       "conway",
 		Description: "conway's game of life from file content",
 		Year:        2026,
@@ -26,7 +37,7 @@ var projects = []Project{
 	},
 	{
 		Title:       "fossil",
-		Description: "a compressor that shows its work",
+		Description: "a transparent compressor",
 		Year:        2026,
 		URL:         "https://github.com/aamtt/fossil",
 		Color:       "#8C2230",
@@ -34,17 +45,6 @@ var projects = []Project{
 		B:           3,
 		C:           5,
 		Phase:       1.05,
-	},
-	{
-		Title:       "avid",
-		Description: "a deterministic avatar generator",
-		Year:        2026,
-		URL:         "https://github.com/aamtt/avid",
-		Color:       "#3F6B6B",
-		A:           5,
-		B:           5,
-		C:           2,
-		Phase:       0.785,
 	},
 	{
 		Title:       "jtp",

@@ -46,8 +46,8 @@ type research struct {
 }
 
 var papers = []research{
-	{Title: "Graph neural networks", Status: "in progress, no preprint", InProgress: true},
-	{Title: "Optimization", Status: "in progress, no preprint", InProgress: true},
+	{Title: "E-Graphs (title pending)", Status: "in progress, no preprint", InProgress: true},
+	{Title: "Optimization (title pending)", Status: "in progress, no preprint", InProgress: true},
 }
 
 type academicView struct {
