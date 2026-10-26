@@ -84,7 +84,7 @@ var projects = []Project{
 var elsewhere = []Project{
 	{
 		Title:       "receipt",
-		Description: "the site this one replaced",
+		Description: "previous revision of this site",
 		URL:         "/receipt",
 		Color:       "#8a8279",
 		A:           4,
@@ -94,7 +94,7 @@ var elsewhere = []Project{
 	},
 	{
 		Title:       "guestbook",
-		Description: "sign it from your terminal",
+		Description: "sign the log from your terminal",
 		URL:         "/guestbook",
 		Color:       "#8a8279",
 		A:           2,
