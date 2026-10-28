@@ -9,8 +9,8 @@ import (
 
 var shortlinks = map[string]string{
 	"/github":  "https://github.com/aamtt",
-	"/twitter": "https://twitter.com/0xA5A5",
-	"/x":       "https://x.com/0xA5A5",
+	"/twitter": "https://twitter.com/fmtthew",
+	"/x":       "https://x.com/fmtthew",
 	"/discord": "https://discord.gg/R3QtA68Cbf",
 }
 
